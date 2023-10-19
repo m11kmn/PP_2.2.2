@@ -1,21 +1,21 @@
 package web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import web.dao.CarDao;
+import web.dao.CarDaoImpl;
+import web.services.CarsService;
+import web.services.CarsServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class HelloController {
-	private final CarDao carDao;
-
-	public HelloController(CarDao carDao) {
-		this.carDao = carDao;
-	}
+public class CarsController {
+	@Autowired
+	private CarsServiceImpl carsService;
 
 	@GetMapping(value = "/hello")
 	public String printWelcome(ModelMap model) {
@@ -28,7 +28,7 @@ public class HelloController {
 	}
 	@GetMapping("/hello/cars")
 	public String carController(@RequestParam(value = "count", required = false) String count, ModelMap model) {
-		model.addAttribute("carList", carDao.getSpecifiedNumbersOfCars(count));
+		model.addAttribute("carList", carsService.getSpecifiedNumbersOfCars(count, carsService.getCarList()));
 		return "cars";
 	}
 	

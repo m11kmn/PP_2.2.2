@@ -17,19 +17,6 @@ public class Car {
         this.series = series;
     }
 
-    private final static List<Car> carList = new ArrayList<>();
-
-    static {
-        carList.add(new Car("Ford", 2014, 123));
-        carList.add(new Car("BMW", 2016, 421));
-        carList.add(new Car("Audi", 2020, 634));
-        carList.add(new Car("Lada", 1999, 532));
-        carList.add(new Car("Honda", 2005, 325));
-    }
-
-    public static List<Car> getCarList() {
-        return carList;
-    }
 
     public String getModel() {
         return model;
